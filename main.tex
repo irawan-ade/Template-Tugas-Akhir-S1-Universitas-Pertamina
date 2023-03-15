@@ -1,0 +1,262 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%     filename  = "main.tex",
+%     version   = "1.2.0",
+%     authors   = "Ade Irawan",
+%     email     = "adeirawan@universitaspertamina.ac.id"
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Gunakan Etc/skripsistyle.cls dan compile dengan pdflatex.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%  2020/01/06   Created              	         Ade
+%  2021/02/03   tambah lembar pemisah	         Herdiansyah
+%  2021/02/22   edit lembar pengesahan           Ade
+%  2021/09/06   membuat lembar pemisah tidak     Dheny
+%               terkena watermark
+%  2022/03/29   fix indentasi lampiran di ToC    Ade
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%------------------------------------------------------------
+% Bagi pemula, skip bagian ini hingga:
+% "Semua informasi penting yang diperlukan" di bawah
+%------------------------------------------------------------
+
+\documentclass{Etc/skripsistyle}
+% \usepackage{showframe} % for showing the frame
+\usepackage{lipsum} % for generating dummy text
+\usepackage{algpseudocode} 
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{upgreek}
+\usepackage{times}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{sectsty}
+\usepackage{indentfirst}
+\usepackage{xcolor}
+
+\usepackage{ragged2e}
+\usepackage{hyperref}
+\usepackage{amsthm}
+\usepackage{multicol}
+\usepackage{natbib} % Bibliography with APA Style
+\usepackage{pdfpages}
+\usepackage{background} % for adding watermark
+\usepackage{longtable}
+\usepackage{tabularx}
+\usepackage{tabularray}
+
+% Modify tabularray>longtblr
+\DefTblrTemplate{contfoot-text}{default}{}
+\DefTblrTemplate{conthead-text}{default}{}
+\DefTblrTemplate{caption-tag}{default}{\tablename\hspace{0.25em}\thetable}
+\DefTblrTemplate{conthead}{default}{}
+\DefTblrTemplate{capcont}{default}{}
+\DefTblrTemplate{caption-sep }{default}{.\hspace{0.25em}}
+
+% untuk code
+\usepackage{minted} 
+\renewcommand{\theFancyVerbLine}{\sffamily \textcolor[rgb]{0.5,0.5,1.0}{\scriptsize \oldstylenums{\arabic{FancyVerbLine}}}}
+
+% Untuk custom blok
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable}
+\usetikzlibrary{shadings,shadows}
+\usepackage{color}
+\PassOptionsToPackage{svgnames}{xcolor}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\newenvironment{myblock}[1]{%
+    \tcolorbox[beamer,%
+    noparskip,breakable,
+    colframe=codegray,%
+    title=#1]}%
+    {\endtcolorbox}
+
+\usepackage{geometry}
+ \geometry{
+ a4paper,
+ left=3cm,
+ top=2.5cm,
+ bottom=2.5cm,
+ right=2.5cm,
+ }
+ 
+ \usepackage{enumitem}
+ \setlist[enumerate,1]{start=0} % only outer nesting level
+
+\usepackage{algorithm}
+\makeatletter
+\renewcommand{\ALG@name}{Algoritma}
+\makeatother
+
+ \newtheorem{innercustomgeneric}{\customgenericname}
+\providecommand{\customgenericname}{}
+\newcommand{\newcustomtheorem}[2]{%
+  \newenvironment{#1}[1]
+  {%
+   \renewcommand\customgenericname{#2}%
+   \renewcommand\theinnercustomgeneric{##1}%
+   \innercustomgeneric
+  }
+  {\endinnercustomgeneric}
+}
+\newcustomtheorem{customthm}{Teorema}
+\newcustomtheorem{customdef}{Definisi}
+
+\setlength{\footskip}{1.7cm}
+%% Line Spacing
+\linespread{1.103} % Jangan dihapus. Ini untuk memastikan line spacing ~15pt. Cara pengecekan: ketik "\the\baselineskip" di dalam dokumen
+%% Paragraph spacing
+\setlength{\parskip}{9pt}
+%% Title
+\usepackage{titlesec}
+\usepackage{apptools}
+\titleformat{\chapter}[display]{\fontsize{14}{14} \center\bfseries}{\IfAppendix{LAMPIRAN}{BAB} \thechapter}{0pt}{}{}
+\titleformat{\section}
+  {\fontsize{12}{12}\bfseries}{\thesection}{1em}{}
+  
+\titlespacing*{\chapter}{0pt}{0pt}{1em}
+\titlespacing*{\section}{0pt}{0pt}{0pt}
+
+%% Page number
+\pagestyle{fancy}
+\fancyhf{}
+\rfoot{Universitas Pertamina \hspace{1pt}-\hspace{1pt} \thepage}
+
+% Redefine the plain page style
+\fancypagestyle{plain}{%
+  \fancyhf{}%
+\rfoot{Universitas Pertamina \hspace{1pt}-\hspace{1pt} \thepage}%
+}
+
+\renewcommand{\headrulewidth}{0pt}
+\DeclareMathOperator*{\argmin}{arg\,min}
+
+\hypersetup{hidelinks}
+%------------------------------------------------------------
+% Semua informasi penting yang diperlukan
+%------------------------------------------------------------
+% {Judul} dan {sub judul jika ada}. Jika tidak ada sub judul biarkan {} kosong
+\title{Bukan Tugas Akhir Biasa}{}
+
+% {Judul} dan {sub judul jika ada} dalam bahasa inggris
+\titleeng{Not an Ordinary Final Project}{}
+
+% Nama Penulis dan NIM
+\author{Sebut Saja Bunga}{13203013}
+
+% Nama Fakultas, tanpa menuliskan kata "Fakultas" di depannya
+\fakultas{Sains dan Ilmu Komputer}
+
+% Nama Program Studi, tanpa menuliskan kata "Program Studi" di depannya
+\prodi{Ilmu Komputer}
+
+% Tanggal lulus sidang (Tanggal dan bulan+tahun dipisah)
+\tgllulus{17}{Agustus 2045}
+
+% Tanggal Pengesahan oleh Pembimbing (Tanggal, bulan, dan tahun digabung)
+\tglpengesahan{17 Agustus 2045}
+
+% Tanggal pembuatan Lembar Pernyataan (Tanggal, bulan, dan tahun digabung)
+\tglpernyataan{17 Agustus 2045}
+
+% Tentukan jumlah pembimbing (1 atau 2)
+\newcounter{jumlahPembimbing}\setcounter{jumlahPembimbing}{2}
+
+% Abaikan Nama dan NIP Pembimbing kedua kalau hanya 1 pembimbing, jangan dihapus
+\pembimbingsatu{Pembimbing Satu}{116xxx}
+\pembimbingdua{Pembimbing Dua}{116xxx}
+
+% Nama Ketua Program Studi dan NIP nya
+\kaprodi{Kaprodi}{116xxx} % Nama dan NIP
+%------------------------------------------------------------
+
+%------------------------------------------------------------
+% Watermark 
+% true: gunakan watermark
+% false: tanpa watermark
+%------------------------------------------------------------
+\newboolean{iswatermark}\setboolean{iswatermark}{false}
+%--------------------------------------------------------------
+
+%--------------------------------------------------------------
+% Pemecahan suku kata
+% Tambahkan kata yang pemenggalan katanya bermasalah di dokumen
+% Pemenggalan suku kata dengan tanda -
+% Setiap kata dipisahkan oleh spasi
+%--------------------------------------------------------------
+\hyphenation{me-ning-kat-kan di-tu-lis-kan me-ne-ri-ma me-la-lu-i Na-mun or-ga-ni-sa-i pe-ner-je-mah pe-me-rin-tah me-nge-na-li aug-men-ta-tion meng-gu-na-kan di-gu-na-kan learn-ing trans-fer-ing bi-sin-do se-mi-ring ber-orde sa-ling}
+%--------------------------------------------------------------
+
+%------------------------------------------------------------
+% Bagi pemula, skip bagian di bawah ini hingga: "Appendices"
+%------------------------------------------------------------
+\begin{document}
+\ActivateBG{}
+\frontmatter
+\upcoverpage
+
+\lembarpengesahan
+\lembarpernyataan
+\abstrakind{Front/abstrakind}
+\abstrakeng{Front/abstrakeng}
+\katapengantar{Front/katapengantar}
+\daftarisi
+\daftartabel
+\daftargambar
+
+\mainmatter
+
+%% Semua BAB
+\include{BAB-1/BAB-1}
+\DeactivateBG{}
+\includepdf{Etc/pemisah.pdf}
+\ActivateBG{}
+\include{BAB-2/BAB-2}
+\DeactivateBG{}
+\includepdf{Etc/pemisah.pdf}
+\ActivateBG{}
+\include{BAB-3/BAB-3}
+\DeactivateBG{}
+\includepdf{Etc/pemisah.pdf}
+\ActivateBG{}
+\include{BAB-4/BAB-4}
+\DeactivateBG{}
+\includepdf{Etc/pemisah.pdf}
+\ActivateBG{}
+\include{BAB-5/BAB-5}
+\DeactivateBG{}
+\includepdf{Etc/pemisah.pdf}
+\ActivateBG{}
+
+%------------------------------------------------------------
+% BIBLIOGRAPHY 
+%------------------------------------------------------------
+\begin{singlespace}
+  \bibliographystyle{apalike}
+  \addcontentsline{toc}{chapter}{DAFTAR PUSTAKA}
+  \bibliography{referensi}
+\end{singlespace}
+
+\DeactivateBG{}
+\includepdf{Etc/pemisah.pdf}
+\ActivateBG{}
+
+%------------------------------------------------------------
+% Appendices
+% (comment) uncomment kode di bawah ini untuk (tidak) menggunakan lampiran
+% tambahkan sendiri folder-folder (lampiran) yang lain
+%------------------------------------------------------------
+\appendix
+\include{Lampiran-A/Lampiran-A}
+% \include{Lampiran-B/Lampiran-B}
+
+\backmatter
+
+\end{document}
+
+%--------------------- end of file ---------------------------------------
