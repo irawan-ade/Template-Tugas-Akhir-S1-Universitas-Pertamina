@@ -399,12 +399,12 @@ Demikian pernyataan ini saya buat dengan sebenarnya \par
 \renewcommand{\cfttabpresnum}{Tabel\ }
 \newlength{\mylent}
 \settowidth{\mylent}{\cfttabpresnum}
-\setlength{\cfttabnumwidth}{\dimexpr\mylent+1.5em}
+\setlength{\cfttabnumwidth}{\dimexpr\mylent+3em}
 
 \newcommand{\daftartabel}{%
 \begin{singlespace}
 	\chapter{\listtablename}%
-	 \phantomsection \@starttoc{lot}%
+	\phantomsection \@starttoc{lot}%
 \end{singlespace}
 \clearpage
 }
@@ -415,8 +415,7 @@ Demikian pernyataan ini saya buat dengan sebenarnya \par
 \renewcommand{\cftfigpresnum}{Gambar\ }
 \newlength{\mylenf}
 \settowidth{\mylenf}{\cftfigpresnum}
-\setlength{\cfttabnumwidth}{\dimexpr\mylenf+1.5em}
-\setlength{\cftfignumwidth}{\dimexpr\mylenf+2em}
+\setlength{\cftfignumwidth}{\dimexpr\mylenf+3em}
 
 \newcommand{\daftargambar}{%
 \begin{singlespace}

@@ -2,7 +2,7 @@
 \chapter{TINJAUAN PUSTAKA}
 \label{BAB2:tinjauan}
 
-Manfaatkan penggunaan perintah \verb|\label{}| untuk menjadikan suatu bab atau subbab sebagai acuan. Untuk mengacu ke bab atau subbab itu maka gunakan perintah \verb|\ref{}|. Sebagai contoh, Bab \verb|\ref{BAB1:pendahuluan}| akan mengahsilkan: Bab \ref{BAB1:pendahuluan}. Teknik yang sama juga bisa digunakan untuk mengacu ke suatu gambar atau tabel. Sebagai contoh, Gambar~\ref{fig:arsitektur} menunjukkan arsitektur dari blok \textit{Residual Networks} (ResNet).
+Manfaatkan penggunaan perintah \verb|\label{}| untuk menjadikan suatu bab atau subbab sebagai acuan. Untuk mengacu ke bab atau subbab itu maka gunakan perintah \verb|\ref{}|. Sebagai contoh, Bab \verb|\ref{BAB1:pendahuluan}| akan menghasilkan: Bab \ref{BAB1:pendahuluan}. Teknik yang sama juga bisa digunakan untuk mengacu ke suatu gambar atau tabel. Sebagai contoh, Gambar~\ref{fig:arsitektur} menunjukkan arsitektur dari blok \textit{Residual Networks} (ResNet).
 \begin{figure}[h]
     \centering
     \includegraphics[scale=0.5]{BAB-2/resnet receiver.png}
@@ -10,16 +10,33 @@ Manfaatkan penggunaan perintah \verb|\label{}| untuk menjadikan suatu bab atau s
     \label{fig:arsitektur}
 \end{figure}
 
-Salah cara untuk membuat tabel, seperti yang ditunjukkan pada Tabel~\ref{tab:test}, adalah dengan menggunakan \verb|longtblr| \citep{tabularray}.
+Salah satu cara untuk membuat tabel, seperti yang ditunjukkan pada Tabel~\ref{tab:test}, adalah dengan menggunakan \verb|longtblr| \citep{tabularray}.
+
+\begin{table}[h]
+    \centering
+    \caption{Tabel dengan tblr}
+    \label{tab:my_label}
+
+    \begin{tblr}{lccr}
+    \hline
+    Alpha & Beta & Gamma & Delta \\
+    \hline
+    Epsilon & Zeta & Eta & Theta \\
+    \hline
+    Iota & Kappa & Lambda & Mu \\
+    \hline
+    \end{tblr}
+\end{table}
+
 \begin{longtblr}[
   caption = {Tabel yang panjang},
-  label = {tab:test},
+  label = {tab:test}
 ]{
   colspec = {|XX[4]|},
   rowhead = 1,
   hlines,
   row{even} = {gray9},
-  row{1} = {olive9},
+  row{1} = {olive9}
 } 
 No. & Kolom 1 \\
 1  & blablabla \\
@@ -44,4 +61,31 @@ No. & Kolom 1 \\
 20  & blablabla \\
 21  & blablabla \\
 22  & blablabla \\
+\end{longtblr}
+
+\begin{longtblr}[
+  caption = {Tabel Dataset Jawaban Mahasiswa},
+  label = {tab:test2},
+]{
+  colspec = {|c|XX[1]|c|},
+  rowhead = 1,
+  hlines,
+  row{even} = {gray9},
+  row{1} = {olive9},
+  % |l|,
+} 
+No & Nama Kolom            & Tipe Data \\  
+1  & Nim                   & ordinal   \\  
+2  & Jawaban pertanyaan 1  & String    \\  
+3  & Jawaban pertanyaan 2  & String    \\  
+4  & Jawaban pertanyaan 3  & String    \\  
+5  & Jawaban pertanyaan 4  & String    \\  
+6  & Jawaban pertanyaan 5  & String    \\  
+7  & Jawaban pertanyaan 6  & String    \\  
+8  & Nilai No 1            & nominal   \\  
+9  & Nilai No 2            & nominal   \\  
+10 & Nilai No 3            & nominal   \\  
+11 & Nilai No 4            & nominal   \\  
+12 & Nilai No 5            & nominal   \\  
+14 & Total Nilai           & nominal   \\  
 \end{longtblr}

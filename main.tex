@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %     filename  = "main.tex",
-%     version   = "1.2.0",
+%     version   = "1.2.1",
 %     authors   = "Ade Irawan",
 %     email     = "adeirawan@universitaspertamina.ac.id"
 %
@@ -49,6 +49,8 @@
 \usepackage{longtable}
 \usepackage{tabularx}
 \usepackage{tabularray}
+\usepackage{multirow}
+\usepackage{booktabs} % For better-looking tables
 
 % Modify tabularray>longtblr
 \DefTblrTemplate{contfoot-text}{default}{}
@@ -85,8 +87,8 @@
  right=2.5cm,
  }
  
- \usepackage{enumitem}
- \setlist[enumerate,1]{start=0} % only outer nesting level
+ % \usepackage{enumitem}
+ % \setlist[enumerate,1]{start=0} % only outer nesting level
 
 \usepackage{algorithm}
 \makeatletter
@@ -141,13 +143,13 @@
 % Semua informasi penting yang diperlukan
 %------------------------------------------------------------
 % {Judul} dan {sub judul jika ada}. Jika tidak ada sub judul biarkan {} kosong
-\title{Bukan Tugas Akhir Biasa}{}
+\title{Judul Tugas Akhir}{}
 
 % {Judul} dan {sub judul jika ada} dalam bahasa inggris
-\titleeng{Not an Ordinary Final Project}{}
+\titleeng{The Title of the Final Project}{}
 
 % Nama Penulis dan NIM
-\author{Sebut Saja Bunga}{13203013}
+\author{Ade Irawan}{13203013}
 
 % Nama Fakultas, tanpa menuliskan kata "Fakultas" di depannya
 \fakultas{Sains dan Ilmu Komputer}
@@ -165,7 +167,7 @@
 \tglpernyataan{17 Agustus 2045}
 
 % Tentukan jumlah pembimbing (1 atau 2)
-\newcounter{jumlahPembimbing}\setcounter{jumlahPembimbing}{2}
+\newcounter{jumlahPembimbing}\setcounter{jumlahPembimbing}{1}
 
 % Abaikan Nama dan NIP Pembimbing kedua kalau hanya 1 pembimbing, jangan dihapus
 \pembimbingsatu{Pembimbing Satu}{116xxx}
@@ -252,8 +254,14 @@
 % tambahkan sendiri folder-folder (lampiran) yang lain
 %------------------------------------------------------------
 \appendix
+\renewcommand{\thesection}{\Alph{chapter}.\arabic{section}}
+\setcounter{section}{0}
+\renewcommand{\thefigure}{\Alph{chapter}.\arabic{figure}}
+\counterwithin{figure}{section}
+
 \include{Lampiran-A/Lampiran-A}
-% \include{Lampiran-B/Lampiran-B}
+\include{Lampiran-B/Lampiran-B}
+% \include{Lampiran-C/Lampiran-C} % jangan lupa tambahkan folder Lampiran-C
 
 \backmatter
 
