@@ -20,6 +20,10 @@
 \RequirePackage{setspace}
 \RequirePackage{tabularx}
 \RequirePackage{tocloft}[2003/09/26]
+% for editing cover's color
+\RequirePackage{xcolor}
+\RequirePackage{pagecolor}
+
 
 \renewcommand{\thechapter}{\Roman{chapter}}
 \renewcommand{\thesection}{\arabic{chapter}.\arabic{section}}
@@ -27,6 +31,12 @@
 \renewcommand{\thetable}{\arabic{chapter}.\arabic{table}}
 \renewcommand{\theequation}{\arabic{chapter}.\arabic{equation}}
 \usepackage{caption} \captionsetup{labelsep=period}
+
+% change cover's color
+\definecolor{mysilver}{RGB}{192, 192, 192}
+\definecolor{pantone2935c}{RGB}{0, 87, 184}
+
+\newcommand{\silverText}{\color{mysilver}}
 
 \newenvironment{front}
 {%---title page layouts
@@ -150,22 +160,42 @@
 %------------------------------------------------------------
 % watermark
 %------------------------------------------------------------
-\newcommand{\DeactivateBG}{
-    \backgroundsetup{contents={}}}
-
 \newcommand{\ActivateBG}%
-{\ifthenelse{\boolean{iswatermark}}%
-{\backgroundsetup{anchor = left, hshift = -4.4cm, scale = 1, angle = 0, opacity = 0.3, contents = {\includegraphics[width = \paperwidth, height = 0.9\paperheight, keepaspectratio] {Etc/watermark.jpeg}}}}%
-{\backgroundsetup{anchor = left, hshift = -4.4cm, scale = 1, angle = 0, opacity = 0.3, contents = {\includegraphics[width = \paperwidth, height = 0.9\paperheight, keepaspectratio] {Etc/white.jpeg}}}}%
+{
+\ifthenelse{\boolean{iswatermark}}%
+{\backgroundsetup{anchor = left, hshift = -4.4cm, scale = 1, angle = 0, opacity = 0.3, contents = {\includegraphics[width = \paperwidth, height = 0.9\paperheight, keepaspectratio] {Etc/watermark.jpeg}}}}{\backgroundsetup{contents={}}}
+}
+
+%------------------------------------------------------------
+% halaman pemisah
+%------------------------------------------------------------
+% Definisikan fungsi untuk menghasilkan satu halaman pemisah
+\RequirePackage{textpos}
+\newcommand{\insertImage}[1]{%
+    \begin{textblock*}{\paperwidth}(2cm,8.25cm) % Ganti koordinat dengan posisi yang diinginkan
+        \includegraphics[width=10cm,keepaspectratio]{#1} % Ganti '#1' dengan nama file gambar
+    \end{textblock*}
+}
+
+\newcommand{\halamanPemisah}[1]{%
+    \newpage
+    \pagecolor{pantone2935c}
+    \insertImage{Etc/LogoUP_silver.png}
+    \thispagestyle{empty}
+    \null
+    \newpage
+    \pagecolor{white}
 }
 
 %------------------------------------------------------------
 % Cover Page
 %------------------------------------------------------------
+\pagecolor{pantone2935c}
 \newcommand{\upcoverpage}{%
 \thispagestyle{empty}%
 \begin{front}
 \begin{center}
+{\silverText
 	\null
 	%\vskip 1.55cm
 	\LARGE \bf \MakeUppercase{\up@title} \par
@@ -178,13 +208,14 @@
                \up@author \par
                \up@NIM \par }
     \vskip 3cm               
-    \includegraphics[scale=0.74]{Etc/LogoUP.png}                     
+    \includegraphics[scale=0.74]{Etc/LogoUP_silver.png}                     
     \vfill
 	{\Large \bf FAKULTAS \MakeUppercase{\up@fakultas} \par%
 	            PROGRAM STUDI \MakeUppercase{\up@prodi} \par%
 	            UNIVERSITAS PERTAMINA \par%
 	            \MakeUppercase{\up@bulantahun} \par}	 
-	}                       
+	}       
+ }
 \end{center}
 \end{front}
 
@@ -192,6 +223,7 @@
 % Sampul dalam
 %------------------------------------------------------------
 \newpage
+\pagecolor{white}
 \thispagestyle{empty}%
 \begin{front}
 \begin{center}
@@ -222,9 +254,7 @@
 % Lembar Pengesahan
 %------------------------------------------------------------
 \newcommand{\lembarpengesahan}{%
-\DeactivateBG{}
-\includepdf{Etc/pemisah.pdf}
-\ActivateBG{}
+\halamanPemisah
 \newpage
 \thispagestyle{empty}%
 \begin{front}
@@ -299,14 +329,25 @@ Apabila dikemudian hari ditemukan adanya kecurangan dalam karya ini, saya bersed
 
 Demi pengembangan ilmu pengetahuan, saya menyetujui untuk memberikan kepada Universitas Pertamina hak bebas royalti noneksklusif ({\it non-exclusive royalty-free right}) atas Tugas Akhir ini beserta perangkat yang ada. Dengan hak bebas royalti noneksklusif ini Universitas Pertamina berhak menyimpan, mengalih media/format-kan, mengelola dalam bentuk pangkatan data ({\it database}), merawat, dan mempublikasikan Tugas Akhir saya selama tetap mencantumkan nama saya sebagai penulis/pencipta dan sebagai pemilik Hak Cipta.
 
-Demikian pernyataan ini saya buat dengan sebenarnya \par
-	\vskip 3cm
-	\hspace{10cm} Jakarta, \up@tglpernyataan \par
-	\hspace{9.8cm} Yang membuat pernyataan,
+Demikian pernyataan ini saya buat dengan sebenarnya.
+
+% Demikian pernyataan ini saya buat dengan sebenarnya \par
+% 	\vskip 3cm
+% 	\hspace{10cm} Jakarta, \up@tglpernyataan \par
+% 	\hspace{9.8cm} Yang membuat pernyataan,
+% 	\vskip 1cm
+%     \hspace{11cm}-- Materai --
+%     \vskip 1cm
+% 	\hspace{10.5cm} \up@author
+
+\begin{center}
+	Jakarta, \up@tglpernyataan \par
 	\vskip 1cm
-    \hspace{11cm}-- Materai --
+    -- Materai --
     \vskip 1cm
-	\hspace{10.5cm} \up@author
+	Yang membuat pernyataan, \par
+	\up@author
+\end{center}
 }	
 \end{front}
 \newpage
@@ -422,9 +463,7 @@ Demikian pernyataan ini saya buat dengan sebenarnya \par
 	\chapter{\listfigurename}%
 	\phantomsection \@starttoc{lof}%
 \end{singlespace}
-\DeactivateBG{}
-\includepdf{Etc/pemisah.pdf}
-\ActivateBG{}
+\halamanPemisah
 \clearpage
 }
 

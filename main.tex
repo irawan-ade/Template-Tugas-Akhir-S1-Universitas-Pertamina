@@ -11,12 +11,16 @@
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-%  2020/01/06   Created              	         Ade
-%  2021/02/03   tambah lembar pemisah	         Herdiansyah
-%  2021/02/22   edit lembar pengesahan           Ade
-%  2021/09/06   membuat lembar pemisah tidak     Dheny
+%  2020/01/06   Created              	           Ade
+%  2021/02/03   tambah lembar pemisah	           Herdiansyah
+%  2021/02/22   edit lembar pengesahan             Ade
+%  2021/09/06   membuat lembar pemisah tidak       Dheny
 %               terkena watermark
-%  2022/03/29   fix indentasi lampiran di ToC    Ade
+%  2022/03/29   fix indentasi lampiran di ToC      Ade
+%  2024/05/02   modifikasi format bibliografi      Zaki
+%               disesuaikan dengan bhs Indonesia
+%  2024/05/12   cover dan halaman pemisah pakai    Ade 
+%               fungsi, revisi lmbr pernyataan
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -182,7 +186,7 @@
 % true: gunakan watermark
 % false: tanpa watermark
 %------------------------------------------------------------
-\newboolean{iswatermark}\setboolean{iswatermark}{false}
+\newboolean{iswatermark}\setboolean{iswatermark}{false}       
 %--------------------------------------------------------------
 
 %--------------------------------------------------------------
@@ -215,39 +219,27 @@
 
 %% Semua BAB
 \include{BAB-1/BAB-1}
-\DeactivateBG{}
-\includepdf{Etc/pemisah.pdf}
-\ActivateBG{}
+\halamanPemisah{}
 \include{BAB-2/BAB-2}
-\DeactivateBG{}
-\includepdf{Etc/pemisah.pdf}
-\ActivateBG{}
+\halamanPemisah{}
 \include{BAB-3/BAB-3}
-\DeactivateBG{}
-\includepdf{Etc/pemisah.pdf}
-\ActivateBG{}
+\halamanPemisah{}
 \include{BAB-4/BAB-4}
-\DeactivateBG{}
-\includepdf{Etc/pemisah.pdf}
-\ActivateBG{}
+\halamanPemisah{}
 \include{BAB-5/BAB-5}
-\DeactivateBG{}
-\includepdf{Etc/pemisah.pdf}
-\ActivateBG{}
+\halamanPemisah{}
 
 %------------------------------------------------------------
 % BIBLIOGRAPHY 
 %------------------------------------------------------------
 \begin{singlespace}
-  \bibliographystyle{apalike}
+  % \bibliographystyle{apalike}
+  \bibliographystyle{Etc/UPERbibliography.bst}
   \addcontentsline{toc}{chapter}{DAFTAR PUSTAKA}
   \bibliography{referensi}
 \end{singlespace}
 
-\DeactivateBG{}
-\includepdf{Etc/pemisah.pdf}
-\ActivateBG{}
-
+\halamanPemisah{}
 %------------------------------------------------------------
 % Appendices
 % (comment) uncomment kode di bawah ini untuk (tidak) menggunakan lampiran
